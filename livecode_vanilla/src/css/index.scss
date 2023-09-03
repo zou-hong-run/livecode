@@ -1,0 +1,50 @@
+@import "./common.scss";
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,body,#container{
+    width: 100vw;
+    height: 100vh;
+}
+.hidden{
+    display: none !important;
+}
+.border{
+    border: 1px dotted white;
+}
+.input{
+    width: 100vw;
+    height: 5vh;
+}
+#container{
+    #top{
+        height: 5vh;
+        background-color: $themeColor;
+        text-align: center;
+        font-size: 6vw;
+        line-height: 5vh;
+    }
+    #content{
+        height: $contentHeight;
+        background-color: yellow;
+    }
+    #tabbar{
+        font-size: 2vh;
+        height: $tabbarHeight;
+        background-color: $themeColor;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        div{
+            border: 1px solid white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        div:hover{
+            border-radius: 50px;
+        }
+    }
+}
