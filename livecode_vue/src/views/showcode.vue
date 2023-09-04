@@ -3,7 +3,6 @@ import { ref, toRaw, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 import { CodeResultType, ChildCodeResultType, getCodeById, getChildCodeById, updateLiveCodeCount, updateChildCodeCount } from "../api/index";
-import { ServeURL } from '../utils/config';
 const router = useRouter();
 const route = useRoute();
 
@@ -24,7 +23,6 @@ let childrenObj = ref<ChildCodeResultType>({
 });
 let pageId = route.query.id as string;
 let isShow = route.query.show as string;
-console.log(window.location)
 if (!pageId) {
     alert("参数错误！！！");
     router.push("/")
