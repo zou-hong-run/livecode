@@ -61,7 +61,7 @@ const getChildCodeById = (id: string) => allChildCodes.value.find((item) => item
     </van-col>
   </van-row>
 
-  <van-tabs style="text-align: center;" v-model:active="active">
+  <van-tabs style="text-align: center;height:100%;" v-model:active="active">
     <van-tab v-for="item in allLiveCodes" :key="item.logoUrl + item.changeValue" :title="item.codeTitle"
       :name="item.codeTitle">
       <van-row>

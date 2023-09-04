@@ -45,12 +45,12 @@ const genLiveCodeImg = async (id: string) => {
 /**
  * 跳转到showcode页面
  */
-const goShowCode = (id:string) => {
+const goShowCode = (id: string) => {
   router.push({
     path: '/showcode',
     query: {
       id,
-      show:"true"
+      show: "true"
     }
   })
 }
@@ -73,34 +73,34 @@ const clickDeleteLiveCode = async (id: string) => {
 </script>
 
 <template>
-  <div v-if="cardList.length===0" style="text-align: center;">什么都没有喔!!!,快去新建活码吧</div>
-  <van-swipe-cell v-for="item in cardList" :key="item.codeTitle + item.id">
-    <van-card @click-thumb="goShowCode(item.id)" :num="JSON.parse(item.childrenIds as any).length" :desc="item.codeDescription"
-      :title="item.codeTitle" class="goods-card" :thumb="item.url">
-      <template #thumb>
-        <van-image class="logo" width="88" height="88" :src="item.url">
-          <img :src="item.logoUrl" class="logoimg" />
+  <div style="height: calc(100% - 44px);">
+    <div v-if="cardList.length === 0" style="text-align: center;">什么都没有喔!!!,快去新建活码吧</div>
+    <van-swipe-cell v-for="item in cardList" :key="item.codeTitle + item.id">
+      <van-card @click-thumb="goShowCode(item.id)" :num="JSON.parse(item.childrenIds as any).length"
+        :desc="item.codeDescription" :title="item.codeTitle" class="goods-card" :thumb="item.url">
+        <template #thumb>
+          <van-image class="logo" width="88" height="88" :src="item.url">
+            <img :src="item.logoUrl" class="logoimg" />
+          </van-image>
+        </template>
+      </van-card>
+      <template #left>
+        <van-button square type="default" @click="showPreviewImage(item.url, item.logoUrl)" class="delete-button"
+          text="点击预览活码图片" />
+      </template>
+      <template #right>
+        <van-button @click="clickDeleteLiveCode(item.id)" square text="删除" type="danger" class="delete-button" />
+      </template>
+    </van-swipe-cell>
+
+    <van-image-preview v-model:show="isShowPreviewImage" :images="previewImageUrl">
+      <template #image="{ src }">
+        <van-image class="preview" :src="src">
+          <van-image class="previewImg" :src="showLogoUrl"></van-image>
         </van-image>
       </template>
-    </van-card>
-    <template #left>
-      <van-button square type="default" @click="showPreviewImage(item.url, item.logoUrl)" class="delete-button"
-        text="预览活码图片" />
-    </template>
-
-    <template #right>
-      <van-button @click="clickDeleteLiveCode(item.id)" square text="删除" type="danger" class="delete-button" />
-    </template>
-  </van-swipe-cell>
-
-
-  <van-image-preview v-model:show="isShowPreviewImage" :images="previewImageUrl">
-    <template #image="{ src }">
-      <van-image class="preview" :src="src">
-        <van-image class="previewImg" :src="showLogoUrl"></van-image>
-      </van-image>
-    </template>
-  </van-image-preview>
+    </van-image-preview>
+  </div>
 
   <tabbar :active="1" />
 </template>
@@ -132,12 +132,12 @@ const clickDeleteLiveCode = async (id: string) => {
 
 .previewImg {
   position: absolute;
-  width: 20%;
-  height: 20%;
+  width: 16%;
+  height: 16%;
   top: 50%;
   left: 50%;
-  margin-left: -10%;
-  margin-top: -10%;
+  margin-left: -8%;
+  margin-top: -8%;
 }
 
 .goods-card {

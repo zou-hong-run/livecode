@@ -69,11 +69,11 @@ const addLogoImg = async (items: UploaderFileListItem | UploaderFileListItem[]) 
 }
 // 表单提交
 const onSubmit = async () => {
-  let {codeTitle,codeDescription,childrenIds,logoUrl,changeValue} = formData;
+  let { codeTitle, codeDescription, childrenIds, logoUrl, changeValue } = formData;
   // proxy转原始数据，然后转换为字符串格式
   let children = JSON.stringify(toRaw(childrenIds));
   // 添加活码
-  await addCode(codeTitle,codeDescription,children,logoUrl,changeValue);
+  await addCode(codeTitle, codeDescription, children, logoUrl, changeValue);
   router.push("/mycode")
 };
 </script>
@@ -105,11 +105,13 @@ const onSubmit = async () => {
         </template>
       </van-field>
 
+      <van-field>
+        <template #input>
+          <van-button loading-text="活码生成中..." :loading="isLoading" round block type="primary"
+            native-type="submit">生成二维码活码</van-button>
+        </template>
+      </van-field>
     </van-cell-group>
-    <div style="margin: 16px;">
-      <van-button loading-text="活码生成中..." :loading="isLoading" round block type="primary"
-        native-type="submit">生成二维码活码</van-button>
-    </div>
   </van-form>
   <tabbar :active="0" />
 </template>
@@ -117,6 +119,8 @@ const onSubmit = async () => {
 
 <style scoped lang='scss'>
 .form {
-  padding-top: 150px;
+  height: calc(100% - 44px);
+  padding-top: 5px;
+  overflow: scroll;
 }
 </style>

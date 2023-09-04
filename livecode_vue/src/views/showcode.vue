@@ -3,6 +3,7 @@ import { ref, toRaw, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 import { CodeResultType, ChildCodeResultType, getCodeById, getChildCodeById, updateLiveCodeCount, updateChildCodeCount } from "../api/index";
+import { ServeURL } from '../utils/config';
 const router = useRouter();
 const route = useRoute();
 
@@ -81,8 +82,7 @@ const setShowChildCode = () => {
 };
 /* 计算最新的图片地址 */
 const imgUrl = computed(() => {
-    let origin = window.location.origin;
-    return origin + "/" + childrenObj.value.codeUrl
+    return ServeURL + "/" + childrenObj.value.codeUrl
 });
 /* 返回 */
 const onClickLeft = () => history.back();
