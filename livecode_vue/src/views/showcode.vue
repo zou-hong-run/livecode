@@ -24,7 +24,7 @@ let childrenObj = ref<ChildCodeResultType>({
 });
 let pageId = route.query.id as string;
 let isShow = route.query.show as string;
-
+console.log(window.location)
 if (!pageId) {
     alert("参数错误！！！");
     router.push("/")
@@ -83,7 +83,8 @@ const setShowChildCode = () => {
 };
 /* 计算最新的图片地址 */
 const imgUrl = computed(() => {
-    return ServeURL + "/" + childrenObj.value.codeUrl
+    let origin = window.location.origin;
+    return origin + "/" + childrenObj.value.codeUrl
 });
 /* 返回 */
 const onClickLeft = () => history.back();
