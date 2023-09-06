@@ -22,6 +22,9 @@ let childrenObj = ref<ChildCodeResultType>({
     codeUrl: "uploads/404.png",
     count: 0
 });
+// 显示预览图
+let isShowPreviewImage = ref(true);
+
 let pageId = route.query.id as string;
 let isShow = route.query.show as string;
 if (!pageId) {
@@ -87,26 +90,29 @@ const imgUrl = computed(() => {
 /* 返回 */
 const onClickLeft = () => history.back();
 // 记录时间
-let timer:string | number | NodeJS.Timeout | undefined = undefined;
+let timer: string | number | NodeJS.Timeout | undefined = undefined;
 // touchstart
-const goTouchStart = ()=>{
-    timer = setTimeout(async()=>{
+const goTouchStart = () => {
+    isShowPreviewImage.value = true
+    timer = setTimeout(async () => {
         // 用户长按 更新 子码计数
-        let {id,count} = childrenObj.value;
-        await changeChildCodeCount(id,count)
-    },600)
+        let { id, count } = childrenObj.value;
+        await changeChildCodeCount(id, count)
+    }, 600)
 }
-const goTouchEnd = ()=>{
+const goTouchEnd = () => {
     clearTimeout(timer)
 }
 </script>
 
 <template>
     <van-nav-bar v-if="isShow" title="秀活码" left-text="返回" left-arrow @click-left="onClickLeft" />
-    <h3 style="text-align: center;color: white;">长按图片扫码</h3>
-    <div @touchstart.prevent="goTouchStart" @touchend.prevent="goTouchEnd" class="image">
-        <van-image :src="imgUrl" />
+    <h3 style="text-align: center;color: white;">长按扫码</h3>
+    <div @touchstart="goTouchStart" @touchend="goTouchEnd" class="image">
+        <img style="width: 70vw;: max-width: 300px;" :src="imgUrl"/>
+        <!-- <van-image-preview v-model:show="isShowPreviewImage" :images="[imgUrl]" /> -->
     </div>
+    
 </template>
 
 
